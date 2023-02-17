@@ -1,0 +1,2 @@
+[default.databases.setsail]
+url = "mysql://root:103243916@localhost/setsail"

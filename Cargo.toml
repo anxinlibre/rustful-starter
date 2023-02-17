@@ -1,0 +1,45 @@
+[package]
+name = "setsail"
+version = "0.1.0"
+edition = "2018"
+default-run = "main"
+
+[lib]
+name = "setsail"
+path = "src/lib.rs"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+
+[dependencies]
+async-stream = { version = "^0.3" }
+async-trait = { version = "0.1" }
+chrono = { version = "^0.4.19", features = ["serde"] }
+
+figment = "0.10.6"
+
+futures = { version = "^0.3" }
+futures-util = { version = "^0.3" }
+
+rocket = { git = "https://github.com/SergioBenitez/Rocket.git", branch = "v0.5-rc", features = [
+  "json",
+] }
+rocket_db_pools = { git = "https://github.com/SergioBenitez/Rocket.git", branch = "v0.5-rc" }
+
+rust_decimal = { version = "^1" }
+rust_decimal_macros = { version = "^1" }
+
+sea-orm = { version = "^0.2.4", features = [
+  "macros",
+], default-features = false }
+serde_json = { version = "^1" }
+uuid = { version = "0.8", features = ["serde", "v4"] }
+serde = "*"
+
+[features]
+default = ["sqlx-mysql", "sqlx-sqlite"]
+sqlx-mysql = ["sea-orm/sqlx-mysql", "rocket_db_pools/sqlx_mysql"]
+sqlx-postgres = ["sea-orm/sqlx-postgres", "rocket_db_pools/sqlx_postgres"]
+sqlx-sqlite = ["sea-orm/sqlx-sqlite", "rocket_db_pools/sqlx_sqlite"]
